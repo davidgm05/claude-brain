@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Claude Code Brain</title>
+</head>
+<body style="background:#000;color:#0f0;font-family:monospace;padding:40px">
+    <h1 style="color:#0f0">🧠 CLAUDE CODE BRAIN</h1>
+    <div id="output" style="margin-top:20px">Loading vault data...</div>
+    <script>
+        console.log('START');
+        fetch('/api/claude-brain')
+            .then(r => { console.log('API status:', r.status); return r.json(); })
+            .then(d => {
+                console.log('DATA:', d);
+                document.getElementById('output').innerHTML = 
+                    '<pre style="color:#0f0">Sessions: ' + d.sessions + '\nTopics: ' + d.topics + '\nTools: ' + d.tools + '\nEntities: ' + d.entities + '</pre>';
+            })
+            .catch(e => {
+                console.error('ERROR:', e);
+                document.getElementById('output').innerHTML = '<pre style="color:red">Error: ' + e.message + '</pre>';
+            });
+    </script>
+</body>
+</html>

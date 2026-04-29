@@ -1,4 +1,22 @@
+# Obsidian
 .obsidian/
-*.log
+
+# System
 .DS_Store
 Thumbs.db
+*.log
+
+# OMC internal
+.omc/
+
+# Build artifacts
+_build/
+
+# Large JSON indexes
+**/entity_index.json
+**/topic_index.json
+**/tool_index.json
+
+# Keep these
+!.gitkeep
+README.md

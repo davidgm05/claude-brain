@@ -1,0 +1,56 @@
+# Top Topics
+
+Ranking of topics by frequency of mention across all sessions.
+
+| Topic | Sessions |
+| ---- | ---- |
+| [[topics/claude-mem-observer|claude-mem-observer]] | 620 |
+| [[topics/session|session]] | 601 |
+| [[topics/memory|memory]] | 160 |
+| [[topics/config|config]] | 158 |
+| [[topics/agent|agent]] | 153 |
+| [[topics/deploy|deploy]] | 143 |
+| [[topics/how-it-works|how-it-works]] | 49 |
+| [[topics/api|api]] | 47 |
+| [[topics/brain|brain]] | 34 |
+| [[topics/problem-solution|problem-solution]] | 31 |
+| [[topics/what-changed|what-changed]] | 27 |
+| [[topics/why-it-exists|why-it-exists]] | 24 |
+| [[topics/dashboard|dashboard]] | 20 |
+| [[topics/claude-mem|claude-mem]] | 18 |
+| [[topics/follow-on|follow-on]] | 18 |
+| [[topics/automation|automation]] | 17 |
+| [[topics/lead|lead]] | 16 |
+| [[topics/workflow|workflow]] | 11 |
+| [[topics/re-read|re-read]] | 11 |
+| [[topics/trade-off|trade-off]] | 11 |
+| [[topics/auth|auth]] | 10 |
+| [[topics/obsidian|obsidian]] | 10 |
+| [[topics/check-in|check-in]] | 9 |
+| [[topics/multi-agent|multi-agent]] | 9 |
+| [[topics/orchestration|orchestration]] | 9 |
+| [[topics/scraping|scraping]] | 7 |
+| [[topics/real-time|real-time]] | 7 |
+| [[topics/marketing|marketing]] | 7 |
+| [[topics/daily-backup|daily-backup]] | 6 |
+| [[topics/database|database]] | 5 |
+| [[topics/inkcalendar-agency|inkcalendar-agency]] | 5 |
+| [[topics/client-side|client-side]] | 5 |
+| [[topics/non-functional|non-functional]] | 4 |
+| [[topics/end-to-end|end-to-end]] | 3 |
+| [[topics/nginx|nginx]] | 3 |
+| [[topics/non-technical|non-technical]] | 3 |
+| [[topics/meta-request|meta-request]] | 3 |
+| [[topics/spanish-speaking|spanish-speaking]] | 3 |
+| [[topics/cache|cache]] | 3 |
+| [[topics/re-reading|re-reading]] | 3 |
+| [[topics/two-letter|two-letter]] | 2 |
+| [[topics/cron-triggered|cron-triggered]] | 2 |
+| [[topics/firecrawl|firecrawl]] | 2 |
+| [[topics/meta-question|meta-question]] | 2 |
+| [[topics/obsidian-vault|obsidian-vault]] | 2 |
+| [[topics/top-performing|top-performing]] | 2 |
+| [[topics/in-app|in-app]] | 2 |
+| [[topics/home-ubuntu|home-ubuntu]] | 2 |
+| [[topics/routine-operation|routine-operation]] | 2 |
+| [[topics/third-party|third-party]] | 2 |
