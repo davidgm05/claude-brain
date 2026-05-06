@@ -3,7 +3,7 @@
 ## metadata
 created: 2026-05-06
 updated: 2026-05-06
-status: Phase 1 Complete
+status: Phase 1 Complete, Phase 2 Planning
 tags: [editorial, kdp, amazon, automation, books]
 
 ---
@@ -23,7 +23,7 @@ Sistema de generación y publicación automática de libros en Amazon KDP.
 ┌─────────────────────────────────────────────────────────────────┐
 │  INPUT: niche + config                                         │
 │    ↓                                                           │
-│  Content Generator (OpenClaw agents - reuse BookFactory)        │
+│  Content Generator (Claude agents nativos)                    │
 │    ↓ (~60 páginas markdown)                                     │
 │  Formatter: Markdown → PDF/EPUB (src/services/formatter.ts)    │
 │    ↓                                                           │
@@ -34,6 +34,55 @@ Sistema de generación y publicación automática de libros en Amazon KDP.
 │    ↓ 📖 Published                                             │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## Agentes (Phase 2)
+
+En lugar de OpenClaw, usamos **agentes nativos de Claude Code**:
+
+| Agente | Rol |
+|--------|-----|
+| `ideator` | Genera concepto + outline + título del libro |
+| `writer` | Escribe capítulos en Markdown |
+| `expander` | Expande contenido con ejemplos, analogías |
+| `verifier` | QA final + consistency check |
+| `cover-gen` | Genera portada HTML/CSS |
+| `formatter` | Convierte Markdown → PDF/EPUB |
+| `autokdp-svc` | Publica en KDP |
+
+---
+
+## Pipeline de Agentes (Phase 2)
+
+```typescript
+// Pipeline de generación de libro
+const bookPipeline = [
+  { agent: 'ideator', input: { niche, ageRange, genre } },
+  { agent: 'writer', input: { outline } },
+  { agent: 'expander', input: { chapters } },
+  { agent: 'verifier', input: { content } },
+  { agent: 'cover-gen', input: { title, theme } },
+  { agent: 'formatter', input: { markdown } },
+  { agent: 'autokdp-svc', input: { bundle } },
+];
+```
+
+### Agente: ideator
+- Input: `{ niche, ageRange, genre, language }`
+- Output: `{ title, oneSentencePromise, targetReader, tableOfContents, styleGuide, chapterFiles }`
+
+### Agente: writer
+- Input: `{ title, outline, styleGuide }`
+- Output: capítulos en Markdown (~60 páginas total)
+
+### Agente: expander
+- Input: `{ rawContent, ageRange }`
+- Output: contenido expandido con ejemplos, ejercicios
+
+### Agente: verifier
+- Input: `{ expandedContent, outline }`
+- Output: `{ finalContent, issuesFound[] }`
 
 ---
 
@@ -70,7 +119,7 @@ editorial-kdp/
 │   ├── index.ts                    # CLI entry point
 │   ├── services/
 │   │   ├── autokdp.ts            # KDP publishing
-│   │   ├── book_generator.ts     # Orchestrator
+│   │   ├── book_generator.ts     # Orchestrator (Phase 2)
 │   │   ├── cover_dimensions.ts   # KDP calculations
 │   │   ├── cover_generator.ts    # Cover generation
 │   │   ├── cover_templates/     # HTML templates
@@ -102,11 +151,15 @@ editorial-kdp/
 - [x] 3 templates de portada (infantil, ficcion, noficcion)
 - [x] CLI básico con commander
 
-### ⚠️ Pendiente (Fase 2)
-- [ ] Integración con OpenClaw agents (ideator/writer/expander)
-- [ ] CLI completo de generación
-- [ ] Dashboard React
+### 🔴 En Progreso (Fase 2)
+- [ ] Pipeline de agentes Claude Code nativos
+- [ ] CLI completo de generación: `npm run generate -- --niche=...`
 - [ ] Testing del pipeline completo
+
+### 🟡 Pendiente (Fase 3)
+- [ ] Dashboard React
+- [ ] Series/characters reutilizables
+- [ ] Multi-language support
 
 ---
 
@@ -124,6 +177,9 @@ npx ts-node src/services/cover_generator.ts
 
 # Format book test
 npx ts-node src/services/formatter.ts
+
+# CLI usage (cuando Phase 2 esté listo)
+npm run generate -- --niche="marketing digital" --genre="noficcion"
 ```
 
 ---
@@ -131,12 +187,12 @@ npx ts-node src/services/formatter.ts
 ## Notas Técnicas
 
 - Usa `puppeteer-extra` + `stealth-plugin` para evitar detección
-- Pexels API: imágenes de uso libre (requiere API key)
+- Pexels API: imágenes de uso libre (requiere API key en PEXELS_API_KEY)
 - Dimensiones KDP: 6x9" standard, spine = pageCount × 0.002252"
 - Auto-kdp requiere login manual la primera vez (cookies guardadas en user_data)
 
 ---
 
-## siguiente paso
+## Próximo Paso
 
-Fase 2: Integrar con OpenClaw agents para generación de contenido completo
+**Fase 2:** Crear pipeline de agentes con TeamCreate de Claude Code para orchestración de generación de contenido.
